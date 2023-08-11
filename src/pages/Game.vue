@@ -15,7 +15,7 @@
     </v-form>
     <div class="squares">
       <v-row v-for="index in y">
-        <v-col v-for="index in x" class="sq"></v-col>
+        <v-col v-for="index in x" class="sq" v-on:mouseenter="changeColor"></v-col>
       </v-row>
     </div>
   </v-container>
@@ -29,7 +29,14 @@ setup(){
         yDefault = ref(0),
         x = ref([]),
         y = ref([]);
-
+  function changeColor(e){
+    console.log(e.target);
+    if(e.target.classList.contains('blue')){
+      e.target.classList.remove('blue');
+    }else{
+      e.target.classList.add('blue');
+    }
+  }
   function changeValue(){
     if(!isNaN(+xDefault.value)){
       x.value.length = +xDefault.value;
@@ -38,7 +45,7 @@ setup(){
       y.value.length = +yDefault.value;
     }
   }
-  return {xDefault, yDefault, x, y, changeValue}
+  return {xDefault, yDefault, x, y, changeValue, changeColor}
 }
 }
 </script>
@@ -63,7 +70,10 @@ setup(){
   margin: 2px;
   background-color: #fff;
 }
-.sq:hover{
+.sq.blue{
   background-color: blue;
 }
+/*.sq:hover{*/
+/*  background-color: blue;*/
+/*}*/
 </style>
