@@ -47,12 +47,22 @@ export default {
       const result = await this.v$.$validate()
       if (!result) {
         console.log(this.v$.$validate())
+        let e = 0,
+            p = 0;
         for(let i = 0; i < this.v$.$errors.length; i++){
           if(this.v$.$errors[i].$propertyPath === 'email'){
             this.errorEmailMessage = this.v$.$errors[i].$message;
+            e++;
           }else if(this.v$.$errors[i].$propertyPath === 'password'){
+            p++;
             this.errorPasswordMessage = this.v$.$errors[i].$message;
           }
+        }
+        if(e === 0){
+          this.errorEmailMessage = '';
+        }
+        if(p === 0){
+          this.errorPasswordMessage = '';
         }
         return
       }
