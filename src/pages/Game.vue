@@ -65,11 +65,13 @@ setup(){
   height: 36px;
   background-color: #ffffff;
 }
-.y{
-  margin-top: 50px;
+.x{
   display: flex;
   flex-direction: row;
   white-space: nowrap;
+}
+.y{
+  margin-top: 50px;
 }
 .squares .x div:hover,.squares .y div:hover{
   background-color: blue;
