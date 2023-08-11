@@ -2,12 +2,10 @@
     <v-container class="form-wrap">
         <v-form fast-fail class="form" @submit.prevent="submitForm">
           <v-text-field
-              v-model.trim="email"
               label="Email"
           ></v-text-field>
 
           <v-text-field
-              v-model="password"
               label="Password"
           ></v-text-field>
 
@@ -25,31 +23,15 @@ import {useRouter} from "vue-router";
 
 export default {
   setup () {
-    const email = ref('');
-    const password = ref('');
     const router = useRouter();
-    const state = reactive({
-      email: '',
-      password: '',
-    })
-    const rules = {
-      email: {email, required},
-      password: {required, minLength: minLength(6)},
-    }
-
-    const v$ = useVuelidate(rules, state)
     function submitForm() {
-      if (v$.$error) {
-        // Обробка помилок валідації
-        return;
-      }
       router.push('/game');
-      // Ваш код для відправлення форми
       console.log('Форму відправлено');
     }
 
-    return { state, password, email, v$, submitForm }
+    return { submitForm }
   }
+
 }
 </script>
 

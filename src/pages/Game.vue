@@ -35,8 +35,12 @@ setup(){
         y = ref([]);
 
   function submitForm(){
-    x.value.length = +xDefault.value;
-    y.value.length = +yDefault.value;
+    if(!isNaN(+xDefault.value)){
+      x.value.length = +xDefault.value;
+    }
+    if(!isNaN(+yDefault.value)){
+      y.value.length = +yDefault.value;
+    }
   }
   return {xDefault, yDefault, x, y, submitForm}
 }
