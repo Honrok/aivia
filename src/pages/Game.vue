@@ -1,26 +1,22 @@
 <template>
   <v-container>
-    <v-form fast-fail class="form" @submit.prevent="submitForm">
+    <v-form fast-fail class="form">
       <v-text-field
           label="Size X"
           v-model="xDefault"
+          @input="changeValue"
       ></v-text-field>
 
       <v-text-field
           label="Size Y"
           v-model="yDefault"
+          @input="changeValue"
       ></v-text-field>
-
-      <v-btn type="submit" block class="mt-2">Submit</v-btn>
     </v-form>
     <div class="squares">
-      <div class="x">
-        <div v-for="index in x">
-        </div>
-      </div>
-      <div class="y">
-        <div v-for="index in y"></div>
-      </div>
+      <v-row v-for="index in y">
+        <v-col v-for="index in x" class="sq"></v-col>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -34,7 +30,7 @@ setup(){
         x = ref([]),
         y = ref([]);
 
-  function submitForm(){
+  function changeValue(){
     if(!isNaN(+xDefault.value)){
       x.value.length = +xDefault.value;
     }
@@ -42,7 +38,7 @@ setup(){
       y.value.length = +yDefault.value;
     }
   }
-  return {xDefault, yDefault, x, y, submitForm}
+  return {xDefault, yDefault, x, y, changeValue}
 }
 }
 </script>
@@ -54,26 +50,20 @@ setup(){
 }
 .squares{
   padding: 20px;
-  background-color: #333333;
   display: flex;
   margin-top: 20px;
   flex-direction: column;
+  background-color: #333333;
 }
-.squares .x div, .squares .y div{
+.sq{
+  max-width: 36px;
+  min-width: 36px;
+  max-height: 36px;
+  min-height: 36px;
   margin: 2px;
-  width: 36px;
-  height: 36px;
-  background-color: #ffffff;
+  background-color: #fff;
 }
-.x{
-  display: flex;
-  flex-direction: row;
-  white-space: nowrap;
-}
-.y{
-  margin-top: 50px;
-}
-.squares .x div:hover,.squares .y div:hover{
+.sq:hover{
   background-color: blue;
 }
 </style>
